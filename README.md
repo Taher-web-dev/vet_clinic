@@ -3,7 +3,9 @@
 > In this repo, We had use relational database to create the data structure for a vet clinic.
 
 ## Built With
-
+- PostgreSQL
+- SQL 
+- git
 
 ## Getting Started
 

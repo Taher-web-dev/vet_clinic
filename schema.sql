@@ -46,3 +46,12 @@ ADD CONSTRAINT fkey_owners
 FOREIGN KEY (owner_id)
 REFERENCES owners(id)
 ON DELETE SET NULL;
+
+DROP TABLE IF EXISTS vets;
+CREATE TABLE vets (
+  id INT GENERATED ALWAYS AS IDENTITY,
+  name VARCHAR(100),
+  age INT,
+  date_of_graduation date,
+  PRIMARY KEY (id)
+);

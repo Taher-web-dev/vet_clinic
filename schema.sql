@@ -71,3 +71,20 @@ CREATE TABLE specializations (
       REFERENCES species(id)
       ON DELETE SET NULL
 );
+
+DROP TABLE IF EXISTS visits;
+CREATE TABLE visits (
+  id INT GENERATED ALWAYS AS IDENTITY,
+  animal_id INT,
+  vet_id INT ,
+  visite_date DATE,
+  PRIMARY KEY (id),
+  CONSTRAINT fk_animal
+    FOREIGN KEY(animal_id)
+      REFERENCES animals (id)
+      ON DELETE SET NULL,
+  CONSTRAINT fk_vets
+    FOREIGN KEY(vet_id)
+      REFERENCES vets(id)
+      ON DELETE SET NULL
+);

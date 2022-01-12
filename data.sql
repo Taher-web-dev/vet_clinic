@@ -91,3 +91,28 @@ VALUES ('Stephanie Mendez', 64, '1981-05-04');
 
 INSERT INTO vets (name, age, date_of_graduation)
 VALUES ('Jack Harkness', 38, '2008-06-08');
+
+INSERT INTO specializations (vets_id, species_id)
+VALUES ( NULL, NULL);
+UPDATE specializations 
+SET vets_id = (SELECT id FROM vets WHERE name = 'William Tatcher');
+UPDATE specializations 
+SET species_id = (SELECT id FROM species WHERE name = 'Pokemon');
+
+INSERT INTO specializations (vets_id, species_id)
+VALUES (
+    (SELECT id FROM vets WHERE name='Stephanie Mendez'),
+    (SELECT id FROM species WHERE name='Digimon')
+);
+
+INSERT INTO specializations (vets_id, species_id)
+VALUES (
+    (SELECT id FROM vets WHERE name='Stephanie Mendez'),
+    (SELECT id FROM species WHERE name='Pokemon')
+);
+
+INSERT INTO specializations (vets_id, species_id)
+VALUES (
+    (SELECT id FROM vets WHERE name = 'Jack Harkness'),
+    (SELECT id FROM species WHERE name = 'Digimon')
+);

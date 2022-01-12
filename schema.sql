@@ -55,3 +55,19 @@ CREATE TABLE vets (
   date_of_graduation date,
   PRIMARY KEY (id)
 );
+
+DROP TABLE IF EXISTS specializations;
+CREATE TABLE specializations (
+  id INT GENERATED ALWAYS AS IDENTITY,
+  vets_id INT,
+  species_id INT,
+  PRIMARY KEY (id),
+  CONSTRAINT fk_vets
+    FOREIGN KEY (vets_id)
+      REFERENCES vets(id)
+      ON DELETE SET NULL,
+  CONSTRAINT fk_species
+    FOREIGN KEY (species_id)
+      REFERENCES species(id)
+      ON DELETE SET NULL
+);

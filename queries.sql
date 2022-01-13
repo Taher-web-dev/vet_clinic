@@ -87,3 +87,69 @@ JOIN owners O ON A.owner_id = O.id
 GROUP BY (O.full_name) 
 ORDER BY ANIMALS_NBR DESC
 LIMIT 1;
+
+SELECT  I.visite_date ,V.name AS vet_name ,A.name AS animal_name 
+FROM visits AS I
+JOIN animals A ON I.animal_id = A.id 
+JOIN vets V ON I.vet_id = V.id
+WHERE V.name = 'William Tatcher'
+ORDER BY I.visite_date DESC
+LIMIT 1;
+
+SELECT COUNT(DISTINCT(I.animal_id)) 
+FROM visits I
+JOIN vets V ON I.animal_id = V.id 
+WHERE (v.name = 'Stephanie Mendez');
+
+SELECT V.name AS vet_name , S.name AS speciality 
+FROM specializations I 
+RIGHT JOIN vets V ON I.vets_id = V.id
+JOIN species S ON I.species_id = S.id;
+
+SELECT A.name AS animal_name
+FROM visits I 
+JOIN animals A ON I.animal_id = A.id
+JOIN vets V ON I.vet_id = V.id 
+WHERE (V.name = 'Stephanie Mendez') AND (I.visite_date BETWEEN '2020-04-01' AND '2020-08-30');
+
+SELECT A.name , Count(A.name) AS visite_nbr 
+FROM visits I
+JOIN animals A ON I.animal_id = A.id 
+GROUP BY (A.name)
+ORDER BY visite_nbr DESC
+LIMIT 1;
+
+SELECT A.name 
+FROM visits I
+JOIN animals A ON I.animal_id = A.id
+JOIN vets V ON I.vet_id = V.id
+WHERE V.name = 'Maisy Smith'
+ORDER BY (I.visite_date) ASC 
+LIMIT 1;
+
+SELECT A.name AS animal_name, A.date_of_birth AS animal_date_of_birth , A.escape_attempts,
+A.weight_kg, A.neutered, V.name AS vet_name, V.age AS vet_age , V.date_of_graduation,
+I.visite_date 
+FROM visits I 
+JOIN animals A ON I.animal_id = A.id
+JOIN vets V ON I.vet_id = V.id 
+ORDER BY (I.visite_date) DESC
+LIMIT 1;
+
+
+SELECT COUNT(*) AS nbr_no_speacialized_vet
+FROM visits I
+JOIN animals A ON I.animal_id = A.id
+JOIN vets V ON I.vet_id = V.id
+JOIN specializations S ON V.id = S.vets_id
+WHERE (A.species_id <> S.species_id);
+
+SELECT S.name,COUNT(*) AS species_visite 
+FROM visits I 
+JOIN vets V ON I.vet_id = V.id
+JOIN animals A ON I.animal_id = A.id
+JOIN species S ON A.species_id = S.id
+WHERE V.name = 'Maisy Smith'
+GROUP BY S.name
+ORDER BY S.name DESC 
+LIMIT 1;

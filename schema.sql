@@ -102,3 +102,5 @@ insert into owners (full_name, email) select 'Owner ' || generate_series(1,25000
 -- Create Index on visit table for animal_id
 CREATE INDEX visit_animal_id ON visits (animal_id DESC);
 
+-- Create Index on visit table for animal_id
+CREATE INDEX visit_vet_id ON visits (vet_id DESC);

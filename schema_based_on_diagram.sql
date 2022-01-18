@@ -40,5 +40,33 @@ CREATE TABLE histories_treatements (
     ON DELETE SET NULL
 );
 
+CREATE TABLE invoices (
+id INT GENERATED ALWAYS AS IDENTITY,
+total_amount decimal,
+generated_at date,
+payed_at date,
+medical_history_id INT,
+PRIMARY KEY (id),
+CONSTRAINT fk_inv_med_his
+  FOREIGN KEY (medical_history_id)
+  REFERENCES medical_histories(id)
+);
 
+CREATE TABLE invoice_items(
+  id INT GENERATED ALWAYS AS IDENTITY,
+  unit_price decimal,
+  quantity INT,
+  total_price decimal,
+  invoice_id INT,
+  treatment_id INT,
+  PRIMARY KEY (id),
+  CONSTRAINT fk_inv_items_treatment
+    FOREIGN KEY(treatment_id)
+    REFERENCES treatments(id)
+    ON DELETE SET NULL,
+  CONSTRAINT fk_inv_items_inv 
+    FOREIGN KEY (invoice_id)
+    REFERENCES invoices(id)
+    ON DELETE SET NULL
+);
 
